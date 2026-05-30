@@ -1,0 +1,68 @@
+# tmux-config
+
+My personal tmux configuration, portable across macOS and Linux. Uses [TPM](https://github.com/tmux-plugins/tpm) to manage plugins, with a small bootstrap script to handle first-time setup on any new machine.
+
+## Install
+
+```sh
+git clone https://github.com/mwbrooks/tmux-config ~/Development/github.com/mwbrooks/tmux-config
+cd ~/Development/github.com/mwbrooks/tmux-config
+./install.sh
+```
+
+The script will:
+
+1. Back up any existing `~/.tmux.conf` (timestamped).
+2. Symlink `~/.tmux.conf` to this repo's config.
+3. Clone TPM to `~/.tmux/plugins/tpm` if missing.
+4. Install all plugins headlessly.
+
+It's idempotent — re-run any time to refresh.
+
+## Requirements
+
+- tmux ≥ 3.0
+- git
+- macOS or Linux
+
+## Plugins
+
+Managed by TPM. Install/update with `<prefix> I` / `<prefix> U` from inside tmux.
+
+| Plugin | Purpose |
+| --- | --- |
+| [tmux-sensible](https://github.com/tmux-plugins/tmux-sensible) | Sensible defaults for common tmux quirks |
+| [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) | Save/restore sessions: `<prefix> Ctrl-s` / `<prefix> Ctrl-r` |
+| [tmux-continuum](https://github.com/tmux-plugins/tmux-continuum) | Auto-save every 15 min, auto-restore on start |
+| [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) | `Ctrl-h/j/k/l` to move between vim splits and tmux panes |
+| [tmux-yank](https://github.com/tmux-plugins/tmux-yank) | Cross-platform clipboard yank (pbcopy on macOS, xclip/wl-copy on Linux) |
+
+## Key bindings
+
+Prefix is `Ctrl-b` (tmux default).
+
+| Keys | Action |
+| --- | --- |
+| `<prefix> \|` | Vertical split (in current path) |
+| `<prefix> -` | Horizontal split (in current path) |
+| `<prefix> h/j/k/l` | Move between panes (vim-style) |
+| `Ctrl-h/j/k/l` | Move between vim splits and tmux panes seamlessly |
+| `<prefix> r` | Reload `~/.tmux.conf` |
+| `<prefix> I` | Install plugins |
+| `<prefix> U` | Update plugins |
+| `<prefix> Ctrl-s` | Save session (resurrect) |
+| `<prefix> Ctrl-r` | Restore session (resurrect) |
+| `v` (in copy mode) | Begin selection |
+| `y` (in copy mode) | Yank to system clipboard (via tmux-yank) |
+| Mouse wheel | Smooth 1-line scroll in copy mode |
+
+## Uninstall
+
+```sh
+rm ~/.tmux.conf
+rm -rf ~/.tmux/plugins
+```
+
+## License
+
+MIT — see [LICENSE](LICENSE).
