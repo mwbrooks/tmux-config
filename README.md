@@ -62,7 +62,3 @@ Prefix is `Ctrl-b` (tmux default).
 rm ~/.tmux.conf
 rm -rf ~/.tmux/plugins
 ```
-
-## License
-
-MIT — see [LICENSE](LICENSE).
