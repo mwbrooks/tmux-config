@@ -2,8 +2,6 @@
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CONF_SRC="$REPO_DIR/.tmux.conf"
-CONF_DEST="$HOME/.tmux.conf"
 TPM_DIR="$HOME/.tmux/plugins/tpm"
 
 if ! command -v tmux >/dev/null 2>&1; then
@@ -11,14 +9,20 @@ if ! command -v tmux >/dev/null 2>&1; then
   exit 1
 fi
 
-if [ -e "$CONF_DEST" ] && [ "$(readlink "$CONF_DEST" || true)" != "$CONF_SRC" ]; then
-  backup="$CONF_DEST.backup-$(date +%Y%m%d%H%M%S)"
-  echo "Backing up existing $CONF_DEST -> $backup"
-  mv "$CONF_DEST" "$backup"
-fi
+# Symlink each tracked dotfile into $HOME, backing up any pre-existing real file.
+link_dotfile() {
+  local src="$1" dest="$2"
+  if [ -e "$dest" ] && [ "$(readlink "$dest" || true)" != "$src" ]; then
+    local backup="$dest.backup-$(date +%Y%m%d%H%M%S)"
+    echo "Backing up existing $dest -> $backup"
+    mv "$dest" "$backup"
+  fi
+  echo "Linking $dest -> $src"
+  ln -sf "$src" "$dest"
+}
 
-echo "Linking $CONF_DEST -> $CONF_SRC"
-ln -sf "$CONF_SRC" "$CONF_DEST"
+link_dotfile "$REPO_DIR/.tmux.conf"   "$HOME/.tmux.conf"
+link_dotfile "$REPO_DIR/.gitmux.conf" "$HOME/.gitmux.conf"
 
 if [ ! -d "$TPM_DIR" ]; then
   echo "Cloning TPM into $TPM_DIR"

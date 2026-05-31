@@ -12,8 +12,8 @@ cd ~/Development/github.com/mwbrooks/tmux-config
 
 The script will:
 
-1. Back up any existing `~/.tmux.conf` (timestamped).
-2. Symlink `~/.tmux.conf` to this repo's config.
+1. Back up any existing `~/.tmux.conf` and `~/.gitmux.conf` (timestamped).
+2. Symlink `~/.tmux.conf` and `~/.gitmux.conf` to this repo's configs.
 3. Clone TPM to `~/.tmux/plugins/tpm` if missing.
 4. Install all plugins headlessly.
 
@@ -24,6 +24,20 @@ It's idempotent — re-run any time to refresh.
 - tmux ≥ 3.0
 - git
 - macOS or Linux
+
+## Optional dependencies
+
+The status bar uses Nerd Font glyphs and a git module. Without these, icons render as boxes and the git branch indicator stays empty - everything else still works.
+
+- **Nerd Font** for the status bar icons. Recommended: JetBrains Mono Nerd Font.
+  - macOS: `brew install --cask font-jetbrains-mono-nerd-font`
+  - Linux: download from https://www.nerdfonts.com/font-downloads
+  - iTerm2: Profiles -> Text -> Font -> "JetBrainsMono Nerd Font". If "Use a different font for non-ASCII text" is on, set the non-ASCII font to the same Nerd Font.
+  - Ghostty: ships with JetBrains Mono Nerd Font by default.
+- **gitmux** for the git branch indicator on the right of the status bar.
+  - macOS/Linux: `brew install gitmux`
+  - Or: `go install github.com/arl/gitmux@latest`
+  - This repo ships a `.gitmux.conf` (compact `branch + flags` layout) and `install.sh` symlinks it to `~/.gitmux.conf`. Catppuccin's gitmux module hard-codes `-cfg ~/.gitmux.conf`, so the symlink is required even if you don't plan to customize.
 
 ## Plugins
 
@@ -59,6 +73,6 @@ Prefix is `Ctrl-b` (tmux default).
 ## Uninstall
 
 ```sh
-rm ~/.tmux.conf
+rm ~/.tmux.conf ~/.gitmux.conf
 rm -rf ~/.tmux/plugins
 ```
