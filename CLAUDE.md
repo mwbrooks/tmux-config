@@ -27,6 +27,7 @@ Inside tmux: `<prefix> I` installs plugins after editing the plugin list, `<pref
 - The Claude Code block (`allow-passthrough on`, `extended-keys on`, `terminal-features 'xterm*:extkeys'`) is required for Claude Code progress notifications and Shift+Enter-to-newline. Don't remove without checking https://code.claude.com/docs/en/terminal-config.
 - Continuum auto-restores the last session on tmux start (`@continuum-restore 'on'`), and resurrect captures pane contents and vim sessions. Behavior changes here are user-visible on every new tmux start.
 - The `copy-mode-vi WheelUpPane`/`WheelDownPane` bindings exist to override tmux's default 5-lines-per-tick scroll. Don't remove them thinking they're redundant.
+- `install.sh` also installs [`recon`](https://github.com/gavraz/recon) via `cargo install` if cargo is present (warns and skips otherwise). recon is an external Rust binary, not a TPM plugin - it doesn't appear in the `set -g @plugin` list. The only tmux-side wiring is `bind a display-popup ... "recon"` (`a` for "agents"; we avoid `prefix g` because Claude Code's TUI swallows it). We currently install from a fork (`mwbrooks/recon` branch `fix-discover-wrapped-claude`) until upstream merges the descendant-walking patch needed to detect claude launched via wrappers like `slack claude`.
 
 ## Conventions
 

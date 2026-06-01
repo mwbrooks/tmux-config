@@ -16,6 +16,7 @@ The script will:
 2. Symlink `~/.tmux.conf` and `~/.gitmux.conf` to this repo's configs.
 3. Clone TPM to `~/.tmux/plugins/tpm` if missing.
 4. Install all plugins headlessly.
+5. Install [`recon`](https://github.com/gavraz/recon) via `cargo install` if cargo is on `$PATH` (warns and skips otherwise).
 
 It's idempotent — re-run any time to refresh.
 
@@ -38,6 +39,9 @@ The status bar uses Nerd Font glyphs and a git module. Without these, icons rend
   - macOS/Linux: `brew install gitmux`
   - Or: `go install github.com/arl/gitmux@latest`
   - This repo ships a `.gitmux.conf` (compact `branch + flags` layout) and `install.sh` symlinks it to `~/.gitmux.conf`. Catppuccin's gitmux module hard-codes `-cfg ~/.gitmux.conf`, so the symlink is required even if you don't plan to customize.
+- **[recon](https://github.com/gavraz/recon)** for the Claude Code agent dashboard (`<prefix> a`).
+  - Requires the Rust toolchain (`cargo`) to build. Install via [rustup](https://rustup.rs/).
+  - `install.sh` cargo-installs from a temporary fork (`mwbrooks/recon` branch `fix-discover-wrapped-claude`) that detects claude launched via wrappers like `slack claude`. Will revert to upstream once the patch lands there.
 
 ## Plugins
 
@@ -62,6 +66,7 @@ Prefix is `Ctrl-b` (tmux default).
 | `<prefix> h/j/k/l` | Move between panes (vim-style) |
 | `Ctrl-h/j/k/l` | Move between vim splits and tmux panes seamlessly |
 | `<prefix> r` | Reload `~/.tmux.conf` |
+| `<prefix> a` | Open the recon Claude Code agent dashboard (popup) |
 | `<prefix> I` | Install plugins |
 | `<prefix> U` | Update plugins |
 | `<prefix> Ctrl-s` | Save session (resurrect) |

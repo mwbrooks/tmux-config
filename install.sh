@@ -34,5 +34,21 @@ fi
 echo "Installing plugins via TPM..."
 "$TPM_DIR/bin/install_plugins"
 
+# recon: tmux-native dashboard for Claude Code agents (https://github.com/gavraz/recon).
+# Installed via cargo because upstream releases ship no prebuilt binaries.
+# TODO: switch back to gavraz/recon once mwbrooks/recon's wrapper-discovery fix lands upstream.
+# The fork patches find_claude_child_pid() to walk descendants so claude launched via wrappers
+# like `slack claude` (bash -> deno -> claude) is detected, not just direct children.
+RECON_GIT="https://github.com/mwbrooks/recon"
+RECON_BRANCH="fix-discover-wrapped-claude"
+if ! command -v cargo >/dev/null 2>&1; then
+  echo "Warning: cargo not found - skipping recon install. Install Rust (https://rustup.rs) and re-run." >&2
+elif ! command -v recon >/dev/null 2>&1; then
+  echo "Installing recon via cargo..."
+  cargo install --git "$RECON_GIT" --branch "$RECON_BRANCH" --locked
+else
+  echo "recon already present at $(command -v recon)"
+fi
+
 echo
 echo "Done. Start tmux, or if it's already running, reload with: <prefix> r"
