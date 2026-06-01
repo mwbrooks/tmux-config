@@ -55,25 +55,88 @@ Managed by TPM. Install/update with `<prefix> I` / `<prefix> U` from inside tmux
 | [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) | `Ctrl-h/j/k/l` to move between vim splits and tmux panes |
 | [tmux-yank](https://github.com/tmux-plugins/tmux-yank) | Cross-platform clipboard yank (pbcopy on macOS, xclip/wl-copy on Linux) |
 
-## Key bindings
+## Cheat sheet
 
-Prefix is `Ctrl-b` (tmux default).
+Prefix is `Ctrl-b` (tmux default). Below, `<p>` = `Ctrl-b`.
+
+### Sessions
+
+| Keys / Command | Action |
+| --- | --- |
+| `tmux` | Start a new session (auto-numbered) |
+| `tmux new -s <name>` | Start a new named session |
+| `tmux ls` | List running sessions (also `tmux list-sessions`) |
+| `tmux attach` | Attach to the most recent session |
+| `tmux attach -t <name>` | Attach to a specific session (`-t` = target) |
+| `tmux kill-session -t <name>` | Kill a session by name |
+| `<p> d` | Detach (leave session running in the background) |
+| `<p> s` | Session picker (interactive switch) |
+| `<p> $` | Rename current session |
+| `<p> Ctrl-s` | Save all sessions (tmux-resurrect) |
+| `<p> Ctrl-r` | Restore last saved sessions (tmux-resurrect) |
+
+### Windows
+
+| Keys / Command | Action |
+| --- | --- |
+| `<p> c` | Create new window (in current pane's cwd) |
+| `<p> ,` | Rename current window |
+| `<p> &` | Kill current window (with confirm) |
+| `<p> 1` … `<p> 9` | Jump to window by number |
+| `<p> n` / `<p> p` | Next / previous window |
+| `Alt+l` / `Alt+k` | Next window without prefix |
+| `Alt+h` / `Alt+j` | Previous window without prefix |
+| `<p> w` | Window picker (interactive) |
+| `<p> .` | Move current window to a new index (prompts) |
+| `:swap-window -t -1` / `+1` | Swap current window left / right (type at `<p> :`) |
+
+### Panes
 
 | Keys | Action |
 | --- | --- |
-| `<prefix> \|` | Vertical split (in current path) |
-| `<prefix> -` | Horizontal split (in current path) |
-| `<prefix> h/j/k/l` | Move between panes (vim-style) |
+| `<p> \|` | Split vertically (in current path) |
+| `<p> -` | Split horizontally (in current path) |
+| `<p> h/j/k/l` | Move between panes (vim-style) |
 | `Ctrl-h/j/k/l` | Move between vim splits and tmux panes seamlessly |
-| `<prefix> r` | Reload `~/.tmux.conf` |
-| `<prefix> a` | Open the recon Claude Code agent dashboard (popup) |
-| `<prefix> I` | Install plugins |
-| `<prefix> U` | Update plugins |
-| `<prefix> Ctrl-s` | Save session (resurrect) |
-| `<prefix> Ctrl-r` | Restore session (resurrect) |
-| `v` (in copy mode) | Begin selection |
-| `y` (in copy mode) | Yank to system clipboard (via tmux-yank) |
-| Mouse wheel | Smooth 1-line scroll in copy mode |
+| `<p> x` | Kill current pane (with confirm) |
+| `<p> z` | Toggle zoom (full screen / restore) |
+| `<p> q` | Display pane numbers briefly |
+| `<p> {` / `<p> }` | Swap pane with previous / next |
+| `<p> Space` | Cycle through preset layouts |
+| `<p> !` | Break current pane out into its own window |
+
+### Copy mode
+
+| Keys | Action |
+| --- | --- |
+| `<p> [` | Enter copy mode |
+| `q` or `Esc` | Exit copy mode |
+| `v` | Begin selection (vim-style) |
+| `y` | Yank selection to system clipboard (via tmux-yank) |
+| `/` / `?` | Search forward / backward |
+| `n` / `N` | Repeat search forward / backward |
+| Mouse wheel | Smooth 1-line scroll |
+
+### Terminal-side selection (bypasses tmux mouse mode)
+
+When you want to drag-select text for the OS clipboard *without* entering copy mode:
+
+| Terminal | Hold while dragging |
+| --- | --- |
+| iTerm2 | `Option` |
+| Ghostty | `Shift` |
+
+Release to copy to the OS clipboard via the terminal's normal selection.
+
+### Tools
+
+| Keys | Action |
+| --- | --- |
+| `<p> r` | Reload `~/.tmux.conf` |
+| `<p> a` | Open the recon Claude Code agent dashboard (popup) |
+| `<p> I` | Install plugins (TPM) |
+| `<p> U` | Update plugins (TPM) |
+| `<p> :` | Command prompt (run any tmux command) |
 
 ## Uninstall
 
