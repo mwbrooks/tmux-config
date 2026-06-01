@@ -17,6 +17,7 @@ The script will:
 3. Clone TPM to `~/.tmux/plugins/tpm` if missing.
 4. Install all plugins headlessly.
 5. Install [`recon`](https://github.com/gavraz/recon) via `cargo install` if cargo is on `$PATH` (warns and skips otherwise).
+6. Append `export CLAUDE_CODE_TMUX_TRUECOLOR=1` to `~/.zshenv` if missing - bypasses Claude Code's chalk-level downgrade inside tmux (see [#36785](https://github.com/anthropics/claude-code/issues/36785)).
 
 It's idempotent — re-run any time to refresh.
 

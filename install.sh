@@ -50,5 +50,20 @@ else
   echo "recon already present at $(command -v recon)"
 fi
 
+# Bypass Claude Code's hardcoded chalk-level downgrade inside tmux, which otherwise
+# renders code-block backgrounds per-token (gray boxes around each word). Must be a
+# real shell-level export; tmux's `set-environment -g` doesn't reach panes opened in
+# existing sessions, and Claude reads the var at module load. ~/.zshenv (not .zshrc)
+# so non-interactive shells like `slack claude` (bash -> deno -> claude) inherit it.
+# See https://github.com/anthropics/claude-code/issues/36785.
+ZSHENV="$HOME/.zshenv"
+TRUECOLOR_EXPORT='export CLAUDE_CODE_TMUX_TRUECOLOR=1'
+if ! grep -qxF "$TRUECOLOR_EXPORT" "$ZSHENV" 2>/dev/null; then
+  echo "Adding CLAUDE_CODE_TMUX_TRUECOLOR=1 to $ZSHENV"
+  printf '\n# Bypass Claude Code chalk-level downgrade inside tmux (see ~/.tmux.conf comment).\n%s\n' "$TRUECOLOR_EXPORT" >> "$ZSHENV"
+else
+  echo "$ZSHENV already exports CLAUDE_CODE_TMUX_TRUECOLOR"
+fi
+
 echo
 echo "Done. Start tmux, or if it's already running, reload with: <prefix> r"
