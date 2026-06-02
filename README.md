@@ -100,7 +100,7 @@ Prefix is `Ctrl-b` (tmux default). Below, `<p>` = `Ctrl-b`.
 | `<p> h/j/k/l` | Move between panes (vim-style) |
 | `Ctrl-h/j/k/l` | Move between vim splits and tmux panes seamlessly |
 | `<p> x` | Kill current pane (with confirm) |
-| `<p> z` | Toggle zoom (full screen / restore) |
+| `<p> z` | Toggle zoom (full screen / restore). A magnifying-glass indicator shows on the right of the status bar while a pane is zoomed |
 | `<p> q` | Display pane numbers briefly |
 | `<p> {` / `<p> }` | Swap pane with previous / next |
 | `<p> Space` | Cycle through preset layouts |
