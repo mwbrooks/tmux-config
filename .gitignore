@@ -1,2 +1,5 @@
+# git
+.worktrees/
+
 # macOS
 .DS_Store
