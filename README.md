@@ -85,8 +85,8 @@ Prefix is `Ctrl-b` (tmux default). Below, `<p>` = `Ctrl-b`.
 | `<p> &` | Kill current window (with confirm) |
 | `<p> 1` … `<p> 9` | Jump to window by number |
 | `<p> n` / `<p> p` | Next / previous window |
-| `Alt+l` / `Alt+k` | Next window without prefix |
-| `Alt+h` / `Alt+j` | Previous window without prefix |
+| `Ctrl+Alt+l` / `Ctrl+Alt+k` | Next window without prefix |
+| `Ctrl+Alt+h` / `Ctrl+Alt+j` | Previous window without prefix |
 | `<p> w` | Window picker (interactive) |
 | `<p> .` | Move current window to a new index (prompts) |
 | `:swap-window -t -1` / `+1` | Swap current window left / right (type at `<p> :`) |
