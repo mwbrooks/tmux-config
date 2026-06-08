@@ -13,7 +13,7 @@ cd ~/Development/github.com/mwbrooks/tmux-config
 The script will:
 
 1. Back up any existing `~/.tmux.conf` and `~/.gitmux.conf` (timestamped).
-2. Symlink `~/.tmux.conf`, `~/.gitmux.conf`, and `~/.tmux-pane-cwd` (the new-window/split cwd helper) to this repo's files.
+2. Symlink `~/.tmux.conf` and `~/.gitmux.conf` to this repo's configs.
 3. Clone TPM to `~/.tmux/plugins/tpm` if missing.
 4. Install all plugins headlessly.
 5. Install [`recon`](https://github.com/gavraz/recon) via `cargo install` if cargo is on `$PATH` (warns and skips otherwise).
@@ -80,7 +80,7 @@ Prefix is `Ctrl-b` (tmux default). Below, `<p>` = `Ctrl-b`.
 
 | Keys / Command | Action |
 | --- | --- |
-| `<p> c` | Create new window in the cwd of the pane's deepest descendant (so `cd`s inside Claude Code et al. carry over; falls back to the pane's own cwd) |
+| `<p> c` | Create new window (in current pane's cwd) |
 | `<p> ,` | Rename current window |
 | `<p> &` | Kill current window (with confirm) |
 | `<p> 1` … `<p> 9` | Jump to window by number |
@@ -95,8 +95,8 @@ Prefix is `Ctrl-b` (tmux default). Below, `<p>` = `Ctrl-b`.
 
 | Keys | Action |
 | --- | --- |
-| `<p> \|` | Split vertically (same deepest-descendant cwd rule as `<p> c`) |
-| `<p> -` | Split horizontally (same deepest-descendant cwd rule as `<p> c`) |
+| `<p> \|` | Split vertically (in current path) |
+| `<p> -` | Split horizontally (in current path) |
 | `<p> h/j/k/l` | Move between panes (vim-style) |
 | `Ctrl-h/j/k/l` | Move between vim splits and tmux panes seamlessly |
 | `<p> x` | Kill current pane (with confirm) |

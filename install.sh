@@ -21,9 +21,8 @@ link_dotfile() {
   ln -sf "$src" "$dest"
 }
 
-link_dotfile "$REPO_DIR/.tmux.conf"        "$HOME/.tmux.conf"
-link_dotfile "$REPO_DIR/.gitmux.conf"      "$HOME/.gitmux.conf"
-link_dotfile "$REPO_DIR/bin/tmux-pane-cwd" "$HOME/.tmux-pane-cwd"
+link_dotfile "$REPO_DIR/.tmux.conf"   "$HOME/.tmux.conf"
+link_dotfile "$REPO_DIR/.gitmux.conf" "$HOME/.gitmux.conf"
 
 if [ ! -d "$TPM_DIR" ]; then
   echo "Cloning TPM into $TPM_DIR"
