@@ -114,6 +114,7 @@ Prefix is `Ctrl-b` (tmux default). Below, `<p>` = `Ctrl-b`.
 | `q` or `Esc` | Exit copy mode |
 | `v` | Begin selection (vim-style) |
 | `y` | Yank selection to system clipboard (via tmux-yank) |
+| Mouse click-drag | Start a selection (auto-enters copy mode); press `y` to yank. Wrapped lines yank as one continuous line |
 | `/` / `?` | Search forward / backward |
 | `n` / `N` | Repeat search forward / backward |
 | Mouse wheel | Smooth 1-line scroll |
@@ -128,6 +129,8 @@ When you want to drag-select text for the OS clipboard *without* entering copy m
 | Ghostty | `Shift` |
 
 Release to copy to the OS clipboard via the terminal's normal selection.
+
+Caveat: because the terminal only sees the character grid, wrapped lines copy with a newline at every visual wrap. To copy wrapped lines as one continuous line, use tmux's mouse drag (no modifier) and press `y` - see the Copy mode table above.
 
 ### Tools
 
