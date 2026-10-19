@@ -82,7 +82,7 @@ Prefix is `Ctrl-b` (tmux default). Below, `<p>` = `Ctrl-b`.
 | --- | --- |
 | `<p> c` | Create new window (in current pane's cwd) |
 | `<p> ,` | Rename current window |
-| `<p> &` | Kill current window (with confirm) |
+| `<p> X` / `<p> &` | Kill current window (with confirm) |
 | `<p> 1` … `<p> 9` | Jump to window by number |
 | `<p> n` / `<p> p` | Next / previous window |
 | `Ctrl+Alt+l` / `Ctrl+Alt+k` | Next window without prefix |
